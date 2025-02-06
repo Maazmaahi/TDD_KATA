@@ -23,7 +23,7 @@ public class StringCalculator {
             int value = Integer.parseInt(num);
             if (value < 0) {
                 negatives.add(value);
-            } else {
+            } else if (value <= 1000) {
                 sum += value;
             }
         }
