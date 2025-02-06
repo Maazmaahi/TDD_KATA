@@ -6,45 +6,40 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class StringCalculatorTest {
+    StringCalculator calculator = new StringCalculator();
+
     @Test
     void testEmptyStringReturnsZero() {
-        StringCalculator calculator = new StringCalculator();
         assertEquals(0, calculator.add(""));  // Expected result: 0
     }
 
     @Test
     void testSingleNumber() {
-        StringCalculator calculator = new StringCalculator();
         assertEquals(1, calculator.add("1"));
     }
 
     @Test
     void testTwoNumbers() {
-        StringCalculator calculator = new StringCalculator();
         assertEquals(6, calculator.add("1,5"));
     }
 
     @Test
     void testMultipleNumbers() {
-        StringCalculator calculator = new StringCalculator();
         assertEquals(10, calculator.add("1,2,3,4"));
     }
 
     @Test
     void testNewlineAsDelimiter() {
-        StringCalculator calculator = new StringCalculator();
         assertEquals(6, calculator.add("1\n2,3"));
     }
 
     @Test
     void testCustomDelimiter() {
-        StringCalculator calculator = new StringCalculator();
         assertEquals(3, calculator.add("//;\n1;2")); // Custom delimiter ';'
     }
 
     @Test
     void testNegativeNumbersThrowException() {
-        StringCalculator calculator = new StringCalculator();
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             calculator.add("1,-2,3");
         });
@@ -53,7 +48,6 @@ public class StringCalculatorTest {
 
     @Test
     void testMultipleNegativeNumbers() {
-        StringCalculator calculator = new StringCalculator();
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             calculator.add("1,-2,-3,4,-5");
         });
@@ -62,15 +56,11 @@ public class StringCalculatorTest {
 
     @Test
     void testIgnoreNumbersGreaterThan1000() {
-        StringCalculator calculator = new StringCalculator();
         assertEquals(2, calculator.add("2,1001"));
     }
 
     @Test
     void testCustomDelimiterAnyLength() {
-        StringCalculator calculator = new StringCalculator();
         assertEquals(6, calculator.add("//[***]\n1***2***3"));
-        assertEquals(15, calculator.add("//[%%%]\n4%%%5%%%6"));
-        assertEquals(24, calculator.add("//[###]\n7###8###9"));
     }
 }

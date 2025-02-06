@@ -26,6 +26,7 @@ public class StringCalculator {
             }
             numbers = numbers.substring(numbers.indexOf("\n") + 1);
         }
+    
         String[] parts = numbers.split(delimiter);
         List<Integer> negatives = new ArrayList<>();
 
