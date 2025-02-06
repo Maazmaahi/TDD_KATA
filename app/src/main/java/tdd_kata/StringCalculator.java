@@ -1,5 +1,9 @@
 package tdd_kata;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class StringCalculator {
     public int add(String numbers) {
         if (numbers.isEmpty()) return 0;
@@ -12,17 +16,24 @@ public class StringCalculator {
         }
     
         String[] parts = numbers.split(delimiter);
-
+        List<Integer> negatives = new ArrayList<>();
 
         int sum = 0;
         for (String num : parts) {
             int value = Integer.parseInt(num);
-        if (value < 0) {
-            throw new IllegalArgumentException("negative numbers not allowed: " + value);
-        } else {
-            sum += value;
+            if (value < 0) {
+                negatives.add(value);
+            } else {
+                sum += value;
+            }
         }
+
+        if (!negatives.isEmpty()) {
+            throw new IllegalArgumentException("negative numbers not allowed: " + negatives.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ")));
         }
+
         return sum;  
     }
 }
