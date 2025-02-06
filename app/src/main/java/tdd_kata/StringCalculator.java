@@ -2,11 +2,18 @@ package tdd_kata;
 
 public class StringCalculator {
     public int add(String numbers) {
-        if (numbers.isEmpty()) {
-            return 0;
-        }
+        if (numbers.isEmpty()) return 0;
 
-        String[] parts = numbers.split("[,\n]");  // Split by comma OR newline
+        String delimiter = "[,\n]";  // Default delimiters: comma and newline
+        if (numbers.startsWith("//")) {
+            int delimiterIndex = numbers.indexOf("\n");
+            delimiter = numbers.substring(2, delimiterIndex); // Extract delimiter
+            numbers = numbers.substring(delimiterIndex + 1);  // Remove delimiter line
+        }
+    
+        String[] parts = numbers.split(delimiter);
+
+
         int sum = 0;
         for (String num : parts) {
             sum += Integer.parseInt(num);
