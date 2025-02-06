@@ -59,4 +59,9 @@ public class StringCalculatorTest {
         });
         assertEquals("negative numbers not allowed: -2, -3, -5", exception.getMessage());
     }
+
+    @Test
+    void testIgnoreNumbersGreaterThan1000() {
+        assertEquals(2, new StringCalculator().add("2,1001"));
+    }
 }
