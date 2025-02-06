@@ -65,4 +65,12 @@ public class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertEquals(2, calculator.add("2,1001"));
     }
+
+    @Test
+    void testCustomDelimiterAnyLength() {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(6, calculator.add("//[***]\n1***2***3"));
+        assertEquals(15, calculator.add("//[%%%]\n4%%%5%%%6"));
+        assertEquals(24, calculator.add("//[###]\n7###8###9"));
+    }
 }
