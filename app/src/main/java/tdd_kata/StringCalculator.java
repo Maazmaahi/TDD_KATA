@@ -2,6 +2,6 @@ package tdd_kata;
 
 public class StringCalculator {
     public int add(String numbers) {
-        return 9;  
+        return 0;  
     }
 }
