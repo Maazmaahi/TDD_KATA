@@ -69,4 +69,10 @@ public class StringCalculatorTest {
         assertEquals(6, calculator.add("//[*][%]\n1*2%3"));
         assertEquals(10, calculator.add("//[;][&]\n2;3&5"));
     }
+
+    @Test
+    void testMultipleLongDelimiters() {
+        assertEquals(15, calculator.add("//[***][###]\n4***5###6"));
+        assertEquals(10, calculator.add("//[---][@@]\n2---3@@5"));
+    }
 }
