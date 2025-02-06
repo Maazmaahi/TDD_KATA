@@ -1,6 +1,7 @@
 package tdd_kata;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,5 +40,14 @@ public class StringCalculatorTest {
     void testCustomDelimiter() {
         StringCalculator calculator = new StringCalculator();
         assertEquals(3, calculator.add("//;\n1;2")); // Custom delimiter ';'
+    }
+
+    @Test
+    void testNegativeNumbersThrowException() {
+        StringCalculator calculator = new StringCalculator();
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculator.add("1,-2,3");
+        });
+        assertEquals("negative numbers not allowed: -2", exception.getMessage());
     }
 }
