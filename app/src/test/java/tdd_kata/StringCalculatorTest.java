@@ -62,6 +62,7 @@ public class StringCalculatorTest {
 
     @Test
     void testIgnoreNumbersGreaterThan1000() {
-        assertEquals(2, new StringCalculator().add("2,1001"));
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(2, calculator.add("2,1001"));
     }
 }
