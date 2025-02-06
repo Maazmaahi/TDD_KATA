@@ -12,20 +12,24 @@ public class StringCalculator {
 
         String delimiter = "[,\n]";  // Default delimiters: comma and newline
         if (numbers.startsWith("//")) {
-            numbers = numbers.substring(2);
-            if (numbers.startsWith("[")) {
-                Matcher matcher = Pattern.compile("\\[(.+?)]").matcher(numbers);
-                StringBuilder delimiters = new StringBuilder();
+            int newlineIndex = numbers.indexOf("\n");
+            String delimiterSection = numbers.substring(2, newlineIndex); // Extract delimiter part
+            numbers = numbers.substring(newlineIndex + 1); // Extract actual numbers
+        
+            if (delimiterSection.startsWith("[")) {
+                // Extract multiple delimiters enclosed in square brackets
+                Matcher matcher = Pattern.compile("\\[(.+?)]").matcher(delimiterSection);
+                List<String> delimiterList = new ArrayList<>();
+                
                 while (matcher.find()) {
-                    if (delimiters.length() > 0) delimiters.append("|");
-                    delimiters.append(Pattern.quote(matcher.group(1))); // Multiple or long delimiters
+                    delimiterList.add(Pattern.quote(matcher.group(1))); // Escape special characters
                 }
-                delimiter = delimiters.toString();
+                delimiter = String.join("|", delimiterList); // Combine multiple delimiters
             } else {
-                delimiter = Pattern.quote(numbers.substring(0, 1)); // Single-character delimiter
+                delimiter = Pattern.quote(delimiterSection); // Single-character delimiter
             }
-            numbers = numbers.substring(numbers.indexOf("\n") + 1);
         }
+        
     
         String[] parts = numbers.split(delimiter);
         List<Integer> negatives = new ArrayList<>();
